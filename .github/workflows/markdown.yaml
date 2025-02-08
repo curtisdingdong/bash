@@ -1,0 +1,53 @@
+---
+name: markdown.lint
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - '**.md'
+      - .mdlrc
+      - .mdl.rb
+      - .markdownlint.rb
+      - .github/workflows/markdown.yaml
+  pull_request:
+    branches:
+      - master
+      - main
+    paths:
+      - '**.md'
+      - .mdlrc
+      - .mdl.rb
+      - .markdownlint.rb
+      - .github/workflows/markdown.yaml
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash -euxo pipefail {0}
+
+jobs:
+  readme_lint:
+    name: Readme lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Environment
+        run: env | sort
+
+      - name: Git version
+        run: git --version
+
+      - uses: actions/checkout@v3
+        name: Git Checkout  #
+        with:
+          submodules: 'false'
+      - name: Run mdl
+        uses: actionshub/markdownlint@main

@@ -1,0 +1,48 @@
+---
+name: yamllint.yaml
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - '**/*.yml'
+      - '**/*.yaml'
+      - .github/workflows/yaml.yaml
+  pull_request:
+    branches:
+      - master
+      - main
+    paths:
+      - '**/*.yml'
+      - '**/*.yaml'
+      - .github/workflows/yaml.yaml
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "for documentation"
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '0 0 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  yamllint:
+    name: 'Yamllint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Yamllint'
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_strict: false
+          yamllint_comment: true
