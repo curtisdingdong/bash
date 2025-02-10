@@ -22,11 +22,11 @@
 
 <https://github.com/sharkdp/bat>
 
-
 ### key bindings for Git objects
+
 <https://github.com/junegunn/fzf-git.sh?tab=readme-ov-file>
 
-### a smarter cd command, inspired by z and autojump.
+### a smarter cd command, inspired by z and autojump
 
 <https://github.com/ajeetdsouza/zoxide>
 
