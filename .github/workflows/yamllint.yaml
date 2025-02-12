@@ -1,3 +1,5 @@
+### MANAGED BY GITHUB-ACTIONS REPO ###
+
 ---
 name: yamllint.yaml
 on:
